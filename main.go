@@ -34,6 +34,11 @@ func timeout(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "did not timeout")
 }
 
+func hellotome(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("hello to me")
+	fmt.Fprint(w, "<h1 style=\"background-color:red;\">Hello, Welcome!</h1>")
+}
+
 func main() {
 	http.HandleFunc("/", helloWorldWriter)
 	http.HandleFunc("/htmlvsplain", htmlVsPlain)
@@ -46,5 +51,10 @@ func main() {
 		ReadTimeout:  1000,
 		WriteTimeout: 1000,
 	}
+
+	var mhjmux http.ServeMux
+	server.Handler = &mhjmux
+	mhjmux.HandleFunc("/", hellotome)
+
 	log.Fatal(server.ListenAndServe())
 }
