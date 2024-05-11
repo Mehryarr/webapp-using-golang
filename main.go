@@ -23,6 +23,7 @@ func helloWorldWriter(w http.ResponseWriter, r *http.Request) {
 func htmlVsPlain(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("html vs plain")
 	w.Header().Set("Content-Type", "text/html")
+	//w.Header().Set("connection", "keep-alive")
 	//w.Header().Set("Content-Type", "text/plain")
 	fmt.Fprint(w, "<h1>Hello, Welcome!</h1>")
 }
